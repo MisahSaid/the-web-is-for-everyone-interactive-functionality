@@ -22,7 +22,7 @@ h1 {
 }
 
 button {
-    background-color: var(--greenbutton);
+    background-color: #139943;
     width: 100%;
     display: grid;
     grid-template-columns: 2fr 1fr;
