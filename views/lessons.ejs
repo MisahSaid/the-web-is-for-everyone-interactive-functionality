@@ -113,12 +113,71 @@
     </div>
 
 <!-- liked playlists #1 -->
-    <div class="likedPlaylist">
+    <div class="likedPlaylist" id="likedP">
         <h5>Liked playlists</h5>
-        <p>Oops!It looks like you didn't like any playlists yet!</p>
+        <p id="placeholder">Oops! It looks like you didn't like any playlists yet!</p>
     </div>
     
+<!-- suggested playlists -->
+
+    <h6>Suggested Playlists </h6>
+        <div>
+            <% suggestedPlaylist.forEach(function(playlist) { %>
+                <article class="playlist2">
+                    <h4 class=""><%= playlist.title %></h4>
+                    <p><%= playlist.description %></p>
+                    <img src="https://fdnd-agency.directus.app/assets/<%= playlist.image %>">
+        
+                    <div class="play">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="9" cy="9" r="9" fill="#3A54DE"/>
+                                <path d="M12.8159 9.79593C13.3367 9.39301 13.3367 8.60684 12.8159 8.20391C11.2422 6.98623 9.48494 6.02645 7.60988 5.3605L7.26734 5.23884C6.61199 5.00608 5.91977 5.44948 5.83105 6.12596C5.58317 8.01608 5.58317 9.98377 5.83105 11.8739C5.91977 12.5504 6.61199 12.9938 7.26733 12.761L7.60988 12.6393C9.48494 11.9734 11.2422 11.0136 12.8159 9.79593Z" fill="white"/>
+                        </svg>
+        
+                        <p>3 min. 5 sec</p>
+                        <button id="hartje"><img src="./assets/images/Solid/Status/Heart.svg" alt="like button"></button>
+
+                    </div>
+
+                </article>
+            <% }) %>
+        </div>
+
 
 </main>
+
+<script>
+// In JavaScript
+// Bedenk een naam die nog niet in gebruik is en declareer die met let;
+// Selecteer met JavaScript het juiste element uit de DOM met behulp van document.querySelector();
+// Gebruik in JavaScript naam.addEventListener() om een event aan een element te koppelen;
+// Gebruik in JavaScript naam.classList.toggle() om een andere class aan een element toe te voegen.
+// ProTip: Gebruik bij elke stap console.log() om te controleren of alles werkt zoals je verwacht dat het werkt.
+
+// Selecteer het hartje-element
+const hartje = document.querySelector('#hartje');
+
+// Selecteer het article-element
+const article = document.querySelector('.playlist2');
+
+// Selecteer de likedPlaylist
+const likedPlaylist = document.querySelector('.likedPlaylist');
+
+// Voeg een eventlistener toe aan het hartje
+hartje.addEventListener('click', function() {
+    // Voeg de class 'liked' toe aan het article-element
+    article.classList.toggle('liked');
+    
+    // Als het article-lement de class 'liked' heeft, verplaats het dan naar likedPlaylist, anders verplaats het terug naar de main
+    if (article.classList.contains('liked')) {
+        likedPlaylist.appendChild(article);
+    } else {
+        document.querySelector('main').appendChild(article);
+    }
+});
+
+
+
+</script>
 
 <%- include('./partials/foot') %>

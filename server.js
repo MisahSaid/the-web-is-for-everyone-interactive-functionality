@@ -28,11 +28,21 @@ app.set('port', process.env.PORT || 8000)
 
 // TODO: routes voor deze pizza applicatie.. GET
 app.get('/', function(request, response) {
-
-  fetchJson('https://fdnd-agency.directus.app/items/tm_story').then((storiesDataUitDeAPI) => {
-    response.render('lessons', {stories: storiesDataUitDeAPI.data})
+  Promise.all([
+    fetchJson('https://fdnd-agency.directus.app/items/tm_story'),
+    fetchJson('https://fdnd-agency.directus.app/items/tm_playlist')
+  ]).then(([storiesDataUitDeAPI, suggestedPlaylistDataUitDeAPI]) => {
+    response.render('lessons', {
+      stories: storiesDataUitDeAPI.data,
+      suggestedPlaylist: suggestedPlaylistDataUitDeAPI.data
+    });
+  }).catch(error => {
+    console.error('Error fetching data:', error);
+    response.status(500).send('Error fetching data');
   });
-})
+});
+
+
 
 app.get('/stories', function(request, response) {
 
@@ -46,6 +56,15 @@ app.get('/playlistsettings', function(request, response) {
 
   fetchJson('https://fdnd-agency.directus.app/items/tm_speaker_profile').then((speakerDataUitDeAPI) => {
     response.render('playlistsettings', {speaker: speakerDataUitDeAPI.data})
+  });
+  
+})
+
+
+app.get('/settings', function (request, response){
+
+  fetchJson('https://fdnd-agency.directus.app/items/tm_speaker_profile').then((speakerDataUitDeAPI) => {
+    response.render('settings', {speaker: speakerDataUitDeAPI.data})
   });
   
 })

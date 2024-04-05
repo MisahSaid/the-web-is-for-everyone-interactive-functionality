@@ -12,7 +12,7 @@
 
 body{
     background: linear-gradient(180deg, rgba(71,24,113,1) 0%, rgba(20,33,81,1) 100%);
-    color: beige;
+    color: white;
     font-family: var(--regularfont);
     margin: 1em;
 }
@@ -223,7 +223,25 @@ nav p{
 }
 
 /* liked playlist */
-h5{
+h5, h6{
     font-size: 20px;
 }
 
+.likedPlaylist p{
+    font-size: 14px;
+    color: white;
+    text-align: center;
+}
+
+#hartje{
+    background-color: transparent;
+}
+
+#hartje img{
+    width: 24px;
+    height: 24px;
+}
+
+#hartje img:hover{
+    background-color: #139943;
+}
